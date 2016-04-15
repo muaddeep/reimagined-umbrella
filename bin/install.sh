@@ -15,6 +15,11 @@ fi
 
 ls $CONFIG_DIR | while read i; do
     echo $CP_COMMAND $CONFIG_DIR/$i $HOME/.$i
-    $CP_COMMAND $CONFIG_DIR/$i $HOME/.$i
+
+	if [ -d $CONFIG_DIR/$i ]; then
+		$CP_COMMAND $CONFIG_DIR/$i/ $HOME/.$i
+	else
+		$CP_COMMAND $CONFIG_DIR/$i $HOME/.$i
+	fi
 done
 
