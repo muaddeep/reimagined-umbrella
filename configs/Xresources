@@ -2,3 +2,7 @@
 
 XTerm*font:  -xos4-terminus-medium-r-normal-*-22-*-*-*-*-*-iso10646-1
 XTerm*utf8: true
+
+XTerm*background: black
+XTerm*foreground: grey
+XTerm*scrollBar: false
