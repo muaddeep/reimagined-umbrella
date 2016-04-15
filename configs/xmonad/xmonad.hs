@@ -457,6 +457,7 @@ myManageHook = manageDocks <+>manageMenus<+>manageDialogs<+>composeAll
 	, className =? "Pidgin"				--> doF(W.shift "a:chat")
 	, className =? "Skype"				--> doF(W.shift "a:chat")
 	, className =? "Iceweasel"	    	--> doF(W.shift "w:webs")
+	, className =? "Firefox"	    	--> doF(W.shift "w:webs")
 	, className =? "Chromium-browser"   --> doF(W.shift "w:webs")
 	, className =? "Icedove"			--> doF(W.shift "l:mail")
 	, className =? "Gnome-terminal"		--> doF(W.shift "e:term")
