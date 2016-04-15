@@ -2,6 +2,7 @@
 
 CURRENT_DIR=$(pwd)
 CONFIG_DIR=$CURRENT_DIR/configs
+SCRIPTS_DIR=$CURRENT_DIR/scripts
 
 CP_COMMAND="cp -r"
 if rsync -h  > /dev/null 2>&1; then
@@ -22,4 +23,11 @@ ls $CONFIG_DIR | while read i; do
 		$CP_COMMAND $CONFIG_DIR/$i $HOME/.$i
 	fi
 done
+
+if [ ! -d $HOME/bin ]; then
+	mkdir $HOME/bin
+fi
+
+echo $CP_COMMAND $SCRIPTS_DIR/ $HOME/bin
+$CP_COMMAND $SCRIPTS_DIR/ $HOME/bin
 
