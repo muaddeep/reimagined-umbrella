@@ -9,7 +9,7 @@
 
 :set cursorline				" Подсветка текущей строки
 
-if &term  == "xterm"
+if &term  == "xterm" || &term == "xterm-256color"
 	:highlight CursorLine guibg=lightblue cterm=none ctermbg=236
 else
 	:highlight CursorLine guibg=lightblue cterm=none ctermbg=80
