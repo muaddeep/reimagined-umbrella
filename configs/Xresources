@@ -1,0 +1,4 @@
+*font:  -xos4-terminus-medium-r-normal-*-22-*-*-*-*-*-*-*
+
+XTerm*font:  -xos4-terminus-medium-r-normal-*-22-*-*-*-*-*-iso10646-1
+XTerm*utf8: true

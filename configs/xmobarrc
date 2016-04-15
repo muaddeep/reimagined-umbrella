@@ -1,0 +1,18 @@
+Config { font = "-xos4-terminus-bold-r-*-*-16-*-*-*-*-*-iso10646-1"
+       , bgColor = "#AEB2C1"
+       , fgColor = "black"
+       , position = Bottom
+       , lowerOnStart = True
+       , commands =  [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+    		    	, Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+					, Run StdinReader
+					, Run Com "/home/diesel/bin/systemload.sh" [] "load" 600
+					, Run Com "/home/diesel/bin/get_acpi_state.sh" [] "acpi" 600
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "|%StdinReader%| - [ %cpu% | %memory% * %swap% | %load% ]     [ %acpi% ]  } { %date%"
+       }

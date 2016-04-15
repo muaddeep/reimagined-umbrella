@@ -1,0 +1,93 @@
+":noremap <silent> <F11> :cal VimCommanderToggle()<CR>
+:set vb 					" Заменить звуковой сигнал визуальным.
+:set mouse=a				" вкл. мышку
+
+:set t_Co=256 				" влючаем 256 цветов
+:colorscheme delek     		" меняем цветовую схему
+:set bg=dark				" темный фон
+:syntax on 					" подсветка синтаксиса
+
+:set cursorline				" Подсветка текущей строки
+
+if &term  == "xterm"
+	:highlight CursorLine guibg=lightblue cterm=none ctermbg=236
+else
+	:highlight CursorLine guibg=lightblue cterm=none ctermbg=80
+endif
+
+:set ruler					" показывать положение курсора все время
+
+:set incsearch  			" показывать первое совпадение при наборе шаблона
+:set nohlsearch				" подсветка найденного
+
+:set ai 					" При начале новой строки отступ копируется из предыдущей
+
+:set sw=4 	  				" Число пробелов используемых при авто отступе.
+:set ts=4 	  				" Размер табуляции.
+
+:set wrap       			" не разрывать строку
+:set linebreak				" ?
+
+:set pastetoggle=<F2>		" убираем нежелательные эффекты форматирование, когда вырезаем или копируем текст с одного окна и вставляем его  в vim.
+
+:set wildmenu				" прикольно показывает варианты выбора :)
+:set wcm=<Tab>				" ?
+
+
+
+:set autoindent				"отступы
+:set smartindent
+
+" Формат строки состояния
+":set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
+:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+
+:set laststatus=2
+:set showcmd				" показывать незавершенные команды в статусбаре
+
+" менюшка для выбора кодировок
+menu VVspell.enable_ru          :setlocal spell spelllang=ru<CR>
+menu VVspell.enable_en          :setlocal spell spelllang=en<CR>
+menu VVspell.enable_enru        :setlocal spell spelllang=en,ru<CR>
+menu Encoding.koi8-r            :e ++enc=koi8-r<CR>
+menu Encoding.windows-1251      :e ++enc=cp1251<CR>
+menu Encoding.ibm-866           :e ++enc=ibm866<CR>
+menu Encoding.utf-8             :e ++enc=utf-8<CR>
+menu Encoding.SpellMenu         :emenu VVspell.<TAB>
+map <F8> :emenu Encoding.<TAB>
+
+"-------------------------------------
+" Сочетания клавиш
+"-------------------------------------
+map <F4> <Esc> :w<CR>:shell<CR> "<f4> - сохранить и выйти в шелл 
+
+" C-c and C-v - Copy/Paste в "глобальный клипборд"
+vmap <C-C> "+yi
+imap <C-V> <esc>"+gPi
+
+" Заставляем shift-insert работать как в Xterm
+map <S-Insert> <MiddleMouse>
+
+
+map <A-DOWN> gj
+map <A-UP> gk
+imap <A-UP>   <ESC>gki
+imap <A-DOWN> <ESC> gji
+
+
+"it's for perl suupport plugin
+      let g:Perl_AuthorName      = 'Vasiliy Litovchenko'     
+      let g:Perl_AuthorRef       = 'VL'                         
+      let g:Perl_Email           = 'muaddeep@gmail.com'            
+      let g:Perl_Company         = ''    
+
+"--------------------
+" folding for perl
+"- -------------------
+let perl_fold=1
+let perl_fold_blocks=1
+set foldlevel=999
+
+let perl_include_pod = 1
+let perl_no_scope_in_variables =1
+
