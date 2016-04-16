@@ -6,3 +6,4 @@ XTerm*utf8: true
 XTerm*background: black
 XTerm*foreground: grey
 XTerm*scrollBar: false
+XTerm*saveLines: 10000
