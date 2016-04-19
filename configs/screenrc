@@ -1,0 +1,6 @@
+caption always "%{= 45}%{+b w}Screen: %n | %h %=%t %c"
+hardstatus alwayslastline
+hardstatus string ' %{g}[ %H %{g}][%= %{wk}%?%-Lw%?%{=b dR}(%{-b dk}%n*%f %t%?(%u)%?%{=b dR})%{= dw}%?%+Lw%?%?%= %{g}][%{d}%l%{g}]%{=b b}[ %m/%d %c ]%{W}'
+
+termcapinfo xterm-color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
