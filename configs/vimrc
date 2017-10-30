@@ -1,21 +1,7 @@
-":noremap <silent> <F11> :cal VimCommanderToggle()<CR>
+:set nocompatible            " be iMproved, required
 :set vb 					" Заменить звуковой сигнал визуальным.
 :set mouse=a				" вкл. мышку
-
-:set t_Co=256 				" влючаем 256 цветов
-:colorscheme delek     		" меняем цветовую схему
-:set bg=dark				" темный фон
-:syntax on 					" подсветка синтаксиса
-
-:set cursorline				" Подсветка текущей строки
-
-if &term  == "xterm" || &term == "xterm-256color"
-	:highlight CursorLine guibg=lightblue cterm=none ctermbg=236
-else
-	:highlight CursorLine guibg=lightblue cterm=none ctermbg=80
-endif
-
-:set ruler					" показывать положение курсора все время
+:set nu
 
 :set incsearch  			" показывать первое совпадение при наборе шаблона
 :set nohlsearch				" подсветка найденного
@@ -26,25 +12,98 @@ endif
 :set sw=4 	  				" Число пробелов используемых при авто отступе.
 :set ts=4 	  				" Размер табуляции.
 
+
 :set wrap       			" не разрывать строку
 :set linebreak				" ?
-
-:set pastetoggle=<F2>		" убираем нежелательные эффекты форматирование, когда вырезаем или копируем текст с одного окна и вставляем его  в vim.
 
 :set wildmenu				" прикольно показывает варианты выбора :)
 :set wcm=<Tab>				" ?
 
-
-
+:set backspace=eol,start,indent "HZ
 :set autoindent				"отступы
 :set smartindent
 
-" Формат строки состояния
-":set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-
 :set laststatus=2
 :set showcmd				" показывать незавершенные команды в статусбаре
+
+" ---- Vundle -------------
+:filetype off                " required for Vundle
+" set the runtime path to include Vundle and initialize
+:set rtp+=~/.vim/bundle/Vundle.vim
+:call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'vim-scripts/xterm16.vim'        "cool colorscheme
+Plugin 'tpope/vim-fugitive'             "vim git support, like Gblame, etc
+Plugin 'vim-scripts/AutoComplPop'       "autocomplete popup
+
+Bundle 'scrooloose/syntastic'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ntpeters/vim-better-whitespace'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'elixir-lang/vim-elixir'
+
+Plugin 'scrooloose/nerdtree'
+
+"Plugin 'vim-scripts/ingo-library'
+"Plugin 'vim-scripts/IndentConsistencyCop'
+
+" All of your Plugins must be added before the following line
+:call vundle#end()            " required
+
+:filetype plugin indent on    " required
+" ---- Vundle End -------------
+
+au BufRead,BufNewFile *.tt setfiletype html
+
+
+"-------- colors --------------------
+
+:set t_Co=256 				" влючаем 256 цветов
+:colorscheme xterm16     	" меняем цветовую схему
+":let xterm16_brightness = 'default'
+":let xterm16_colormap = 'allblue'
+":let xterm16_colormap = 'softlight'
+
+":set bg=dark				" темный фон
+:syntax on 					" подсветка синтаксиса
+
+:set cursorline				" Подсветка текущей строки
+
+if &term  == "xterm" || &term == "xterm-256color"
+    :highlight CursorLine guibg=lightblue cterm=none ctermbg=236
+else
+    :highlight CursorLine guibg=lightblue cterm=none ctermbg=236
+endif
+
+:set ruler					" показывать положение курсора все время
+
+:set guioptions-=r          "Removes windows scrollbars
+:set guioptions-=L          "Removes NerdTree scrollbar
+
+"let g:airline_powerline_fonts = 1
+let g:airline_theme="hybrid"
+
+let g:airline_section_c='%F%m%r%h%w'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline_section_warning = ''
+"let g:airline_section_error = ''
+" ---- colors end-------------
+
+
+" Формат строки состояния
+":set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P
+:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+
 
 " менюшка для выбора кодировок
 menu VVspell.enable_ru          :setlocal spell spelllang=ru<CR>
@@ -57,10 +116,13 @@ menu Encoding.utf-8             :e ++enc=utf-8<CR>
 menu Encoding.SpellMenu         :emenu VVspell.<TAB>
 map <F8> :emenu Encoding.<TAB>
 
+
 "-------------------------------------
 " Сочетания клавиш
 "-------------------------------------
-map <F4> <Esc> :w<CR>:shell<CR> "<f4> - сохранить и выйти в шелл 
+:set pastetoggle=<F2>		" убираем нежелательные эффекты форматирование, когда вырезаем или копируем текст с одного окна и вставляем его  в vim.
+
+map <F4> <Esc> :w<CR>:shell<CR> "<f4> - сохранить и выйти в шелл
 
 " C-c and C-v - Copy/Paste в "глобальный клипборд"
 vmap <C-C> "+yi
@@ -69,7 +131,6 @@ imap <C-V> <esc>"+gPi
 " Заставляем shift-insert работать как в Xterm
 map <S-Insert> <MiddleMouse>
 
-
 map <A-DOWN> gj
 map <A-UP> gk
 imap <A-UP>   <ESC>gki
@@ -77,10 +138,10 @@ imap <A-DOWN> <ESC> gji
 
 
 "it's for perl suupport plugin
-      let g:Perl_AuthorName      = 'Vasiliy Litovchenko'     
-      let g:Perl_AuthorRef       = 'VL'                         
-      let g:Perl_Email           = 'muaddeep@gmail.com'            
-      let g:Perl_Company         = ''    
+      let g:Perl_AuthorName      = 'Vasiliy Litovchenko'
+      let g:Perl_AuthorRef       = 'VL'
+      let g:Perl_Email           = 'muaddeep@gmail.com'
+      let g:Perl_Company         = ''
 
 "--------------------
 " folding for perl
@@ -92,3 +153,15 @@ set foldlevel=999
 let perl_include_pod = 1
 let perl_no_scope_in_variables =1
 
+" When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+
+
+"---- vars:
+:let @d="use Data::Dumper;\nwarn Data::Dumper::Dumper();"
+:let @c="use Carp qw<longmess>;\nuse Data::Dumper;\nmy $mess = longmess();\nwarn Data::Dumper::Dumper( $mess );\n"
+
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
